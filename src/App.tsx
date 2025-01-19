@@ -116,7 +116,7 @@ function EmptyState({ onSelect }: { onSelect: (prompt: string) => void }) {
         {suggestions.map((suggestion, index) => (
           <button
             key={index}
-            onClick={() => onSelect(suggestion.title)}
+            onClick={() => onSelect(suggestion.title + ' ' + suggestion.subtitle)}
             className="bg-white p-4 rounded-xl border border-gray-200 hover:border-orange-200 hover:shadow-sm transition-all duration-200 text-left">
             <h3 className="font-medium text-gray-900">{suggestion.title}</h3>
             <p className="text-sm text-gray-500">{suggestion.subtitle}</p>
