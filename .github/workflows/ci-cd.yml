@@ -43,7 +43,7 @@ jobs:
 
       # Step 7: Deploy to Netlify
       - name: Deploy to Netlify
-        uses: netlify/actions/cli@v2
+        uses: netlify/actions@v3
         with:
           args: deploy --dir=dist --prod
         env:
