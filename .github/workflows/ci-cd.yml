@@ -53,7 +53,7 @@ jobs:
 
       # Step 8: Deploy to Netlify
       - name: Deploy to Netlify
-        uses: netlify/actions/cli@v2  # Correct action
+        uses: netlify/actions
         with:
           args: deploy --dir=dist --prod
         env:
