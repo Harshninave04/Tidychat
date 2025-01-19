@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const API_KEY = 'AIzaSyD_AA9nA23WVsusaPzT1KAKd4Mb_EyxOfE';
+const API_KEY = import.meta.env.VITE_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 export async function getGeminiResponse(prompt: string) {
