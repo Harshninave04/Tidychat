@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20  # Use Node.js 20 to match your local environment
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -29,13 +29,19 @@ jobs:
       - name: Run tests
         run: npm test
 
-      # Step 5: Build the app
+      # Step 5: Debugging - List files before build
+      - name: List files before build
+        run: ls -R
+
+      # Step 6: Build the app
       - name: Build the app
         run: |
           npm run build
-          ls -R  # List files to verify the `dist` folder
+          ls -R  # List files after build to verify the `dist` folder
+        env:
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}  # Add the environment variable
 
-      # Step 6: Deploy to Netlify
+      # Step 7: Deploy to Netlify
       - name: Deploy to Netlify
         uses: netlify/actions/cli@v2
         with:
