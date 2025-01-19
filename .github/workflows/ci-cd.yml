@@ -41,9 +41,19 @@ jobs:
         env:
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}  # Add the environment variable
 
-      # Step 7: Deploy to Netlify
+      # Step 7: Verify dist folder
+      - name: Verify dist folder
+        run: |
+          if [ -d "dist" ]; then
+            echo "dist folder exists"
+          else
+            echo "dist folder does not exist"
+            exit 1
+          fi
+
+      # Step 8: Deploy to Netlify
       - name: Deploy to Netlify
-        uses: netlify/actions/cli@v2 # correct version
+        uses: netlify/actions/cli@v2  # Correct action
         with:
           args: deploy --dir=dist --prod
         env:
