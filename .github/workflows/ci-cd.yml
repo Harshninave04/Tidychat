@@ -23,41 +23,12 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          node-version: 20  # Use Node.js 20 to match your local environment
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Run tests
-      - name: Run tests
-        run: npm test
-
-      # Step 5: Debugging - List files before build
-      - name: List files before build
-        run: ls -R
-
-      # Step 6: Build the app
-      - name: Build the app
-        run: |
-          npm run build
-          ls -R  # List files after build to verify the `dist` folder
-        env:
-          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}  # Add the environment variable
-
-      # Step 7: Verify dist folder
-      - name: Verify dist folder
-        run: |
-          if [ -d "dist" ]; then
-            echo "dist folder exists"
-          else
-            echo "dist folder does not exist"
-            exit 1
-          fi
-
-      # Step 8: Deploy to Netlify
-      - name: Deploy to Netlify
-        uses: netlify/actions@v2
+      # Step 4: Build and push Docker image
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
